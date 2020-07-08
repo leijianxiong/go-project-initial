@@ -1,0 +1,30 @@
+# IDE ignore
+.idea/
+*.ipr
+*.iml
+*.iws
+.vscode/
+
+# temp ignore
+*.log
+*.cache
+*.diff
+*.exe
+*.exe~
+*.patch
+*.tmp
+*.swp
+
+# system ignore
+.DS_Store
+Thumbs.db
+
+.env
+logs
+
+# build
+/target
+/dist
+*.cmd
+main
+/cmd/entry/entry
