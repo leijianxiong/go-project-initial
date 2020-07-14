@@ -11,7 +11,7 @@ import (
 
 func TestMailDialer(t *testing.T) {
 	m := gomail.NewMessage()
-	m.SetHeader("Form", configs.Conf.Mail.Username)
+	m.SetHeader("From", configs.Conf.Mail.Username)
 	m.SetHeader("To", "jianxiong.lei@outlook.com")
 	m.SetHeader("Subject", fmt.Sprintf("TestMailDialer-%s", time.Now()))
 	m.SetBody("text/html", fmt.Sprintf("<p>message: %s</p>", time.Now()))
