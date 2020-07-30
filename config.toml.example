@@ -1,0 +1,40 @@
+[APP]
+Name = "go-project-initial"
+MODE = "debug" #debug test release
+Listen = ":9034"
+CacheExpire = "5m"
+CacheCleanInterval = "1m"
+StorePrefix = "http://localhost/uploads"
+FileUploadEngineName = "local-prefix" #local-prefix aliyun-oss
+AdminEnv = "local" #local test prod
+
+[DATABASE]
+HOST = "192.168.33.22"
+PORT = 3306
+USERNAME = "root"
+PASSWORD = "123456"
+DBNAME = "goadmin"
+CHARSET = "utf8mb4"
+
+[REDIS]
+host = "127.0.0.1"
+port = 6379
+DB = 0
+Password = ""
+
+[LOG]
+#保留文件个数
+RotationCount = 30
+Level = "debug"
+
+[mail]
+Host = ""
+Port = 0
+Username = ""
+Password = ""
+
+[AliyunOss]
+Endpoint = ""
+AccessKeyId = ""
+AccessKeySecret = ""
+BucketName = ""

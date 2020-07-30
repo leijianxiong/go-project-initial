@@ -5,11 +5,11 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
 	log "github.com/sirupsen/logrus"
-	"sync"
 	"go-project-initial/configs"
+	"sync"
 )
 
-func init()  {
+func init() {
 	new(sync.Once).Do(initDb)
 }
 

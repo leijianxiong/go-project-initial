@@ -28,3 +28,7 @@ logs
 *.cmd
 main
 /cmd/entry/entry
+uploads
+/assets/dist
+nginx-proxy.conf
+config.toml

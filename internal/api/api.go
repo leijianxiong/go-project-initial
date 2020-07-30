@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	log "github.com/sirupsen/logrus"
+	"go-project-initial/configs"
 	"math"
 	"net/http"
 	"runtime"
-	"go-project-initial/configs"
 )
 
 const ErrnoFail = 400
@@ -20,16 +20,16 @@ func Fail(errmsg string, errnos ...int) gin.H {
 	}
 
 	return gin.H{
-		"errno": errno,
+		"errno":  errno,
 		"errmsg": errmsg,
 	}
 }
 
 func Success(data interface{}) gin.H {
 	return gin.H{
-		"errno": ErrnoSuccess,
+		"errno":  ErrnoSuccess,
 		"errmsg": "",
-		"data": data,
+		"data":   data,
 	}
 }
 

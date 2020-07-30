@@ -21,4 +21,3 @@ func TestParse(t *testing.T) {
 func TestProjectDir(t *testing.T) {
 	fmt.Println("project dir:", ProjectDir())
 }
-

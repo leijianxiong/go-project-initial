@@ -2,11 +2,11 @@ package boot
 
 import (
 	"fmt"
+	"go-project-initial/configs"
 	"gopkg.in/gomail.v2"
 	"log"
 	"testing"
 	"time"
-	"go-project-initial/configs"
 )
 
 func TestMailDialer(t *testing.T) {

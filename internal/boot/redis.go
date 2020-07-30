@@ -4,12 +4,12 @@ import (
 	"fmt"
 	"github.com/go-redis/redis/v7"
 	log "github.com/sirupsen/logrus"
+	"go-project-initial/configs"
 	"math"
 	"time"
-	"go-project-initial/configs"
 )
 
-func init()  {
+func init() {
 	_ = Redis()
 }
 
@@ -21,7 +21,7 @@ func Redis() *redis.Client {
 		redisClient = redis.NewClient(&redis.Options{
 			Addr:     addr,
 			Password: configs.Conf.Redis.Password, // no password set
-			DB:       configs.Conf.Redis.DB,  // use default DB
+			DB:       configs.Conf.Redis.DB,       // use default DB
 		})
 		pong, err := redisClient.Ping().Result()
 		log.Println("redis ping:", pong)
@@ -33,8 +33,8 @@ func Redis() *redis.Client {
 }
 
 var ModeEnvMap = map[string]string{
-	"debug": "local",
-	"test": "test",
+	"debug":   "local",
+	"test":    "test",
 	"release": "production",
 }
 
@@ -55,6 +55,6 @@ func RedisScore() float64 {
 }
 
 func RedisScoreToTime(score float64) (t time.Time) {
-	t = time.Unix(int64(score / math.Pow10(6)), 0)
+	t = time.Unix(int64(score/math.Pow10(6)), 0)
 	return
 }

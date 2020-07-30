@@ -5,11 +5,10 @@ import (
 	rotatelogs "github.com/lestrrat-go/file-rotatelogs"
 	"github.com/rifflock/lfshook"
 	log "github.com/sirupsen/logrus"
+	"go-project-initial/configs"
 	"path/filepath"
 	"time"
-	"go-project-initial/configs"
 )
-
 
 func init() {
 	p := fmt.Sprintf(configs.ProjectDir()+"/logs/%s.log", "default")
@@ -35,7 +34,7 @@ func init() {
 			log.ErrorLevel: writer,
 		},
 		&log.TextFormatter{
-		   DisableQuote: true,
+			DisableQuote: true,
 		},
 	))
 }
@@ -48,7 +47,7 @@ func NewLogger(logName string) *log.Logger {
 	}
 
 	if logs == nil {
-		logs = map[string]*log.Logger{}
+		logs = make(map[string]*log.Logger)
 	}
 
 	if l, ok := logs[logName]; ok {
@@ -67,7 +66,7 @@ func NewLogger(logName string) *log.Logger {
 		rotatelogs.WithLinkName(p),
 		//rotatelogs.WithMaxAge(86400*time.Second),
 		rotatelogs.WithRotationCount(uint(configs.Conf.Log.RotationCount)),
-		rotatelogs.WithRotationTime(24 * time.Hour),
+		rotatelogs.WithRotationTime(24*time.Hour),
 	)
 
 	l := log.New()

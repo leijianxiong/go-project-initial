@@ -1,34 +1,38 @@
 server {
-    listen       8080;
+    listen       9035;
     server_name  localhost;
 
     charset utf-8;
-    #access_log  /var/log/nginx/proxy-access.log;
+    access_log  /var/log/nginx/staronline-proxy-access.log;
+    error_log  /var/log/nginx/staronline-proxy-error.log;
 
-    #如果是css,js|fonts|png|svg|html|txt 资源文件 nginx 直接处理，不提交到后台让go处理。
-    # nginx 会在root 对应的目录下 去找这些资源文件
-    location ~ \.(css|js|fonts|png|svg|html|txt|ico)$ {
-        access_log on;
-        #expires 1d;
-
-        root /home/vagrant/jx/jumai/git/network_query_system/assets;
-        try_files $uri @backend;
+    #网站首页
+    location = / {
+        root /home/vagrant/jx/jumai/git/staronline/assets/dist;
+        try_files /index.html =404;
     }
 
-    # todo 首页
-    #location = / {
-    #    root /home/vagrant/jx/jumai/git/network_query_system/assets;
-    #    index index.html index.htm;
-    #}
-
-    location / {
+    #兼容后台post的一些相关请求, 再次刷新页面时会走get 报404的问题
+    #当发现get的/admin/(new|edit)/... 重定向到/admin/info/...
+    location ~ /admin/(new|edit)/(.+) {
+        if ($request_method = GET) {
+            rewrite /admin/(new|edit)/(.+) /admin/info/$2 permanent;
+        }
         try_files /_not_exists_ @backend;
     }
 
+    #所有请求
+    location / {
+        root /home/vagrant/jx/jumai/git/staronline;
+        index index.html;
+        try_files /assets/dist/$uri /assets/$uri @backend;
+    }
+
+    #后端请求
     location @backend {
         proxy_set_header X-Forwarded-For $remote_addr;
         proxy_set_header Host            $http_host;
         #转发给go监听的端口
-        proxy_pass http://127.0.0.1:8081;
+        proxy_pass http://127.0.0.1:9034;
     }
 }

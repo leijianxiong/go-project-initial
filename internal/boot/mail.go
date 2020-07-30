@@ -2,8 +2,8 @@ package boot
 
 import (
 	"crypto/tls"
-	"gopkg.in/gomail.v2"
 	"go-project-initial/configs"
+	"gopkg.in/gomail.v2"
 )
 
 var MailDialer *gomail.Dialer
